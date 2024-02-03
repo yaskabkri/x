@@ -1,0 +1,11 @@
+<!-- tweets/templates/tweets/create_tweet.html -->
+
+
+<h1>Create New Tweet</h1>
+<form method="post">
+  {% csrf_token %}
+  <label for="content">Content:</label><br>
+  <textarea id="content" name="content" rows="4" cols="50"></textarea><br>
+  <input type="submit" value="Submit">
+</form>
+

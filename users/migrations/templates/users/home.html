@@ -1,0 +1,11 @@
+<!-- tweets/templates/tweets/home.html -->
+
+
+  <h1>Home Feed</h1>
+  <a href="{% url 'create_tweet' %}">Create New Tweet</a>
+  <ul>
+    {% for tweet in tweets %}
+      <li>{{ tweet.content }} - {{ tweet.user.username }} ({{ tweet.created_at }})</li>
+    
+  </ul>
+
