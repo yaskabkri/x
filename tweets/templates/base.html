@@ -53,7 +53,7 @@
 
         /* Style footer */
         footer {
-            background-color: #594ef7;
+            background-color: #f17522;
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -62,11 +62,12 @@
 </head>
 <body>
     <header>
-        <h1>Your Website</h1>
+        <h1></h1>
         <!-- Add your navigation menu here -->
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'product_list' %}">product</a></li>
                 <li><a href="{% url 'login' %}">login</a></li>
                 <li><a href="{% url 'register' %}">register</a></li>
                 <!-- Add more navigation links as needed -->
