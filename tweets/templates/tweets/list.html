@@ -36,7 +36,12 @@
         {% if not item.item_video %}
         <div class="item">
             <!-- Display item images -->
+            {% if item.image %}
             <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            {% else %}
+            {{ item.name }}
+            {% endif %}
+            
             {% if item.item_video %}
                 <video controls>
                     <source src="{{ item.item_video.url }}" type="video/mp4">
