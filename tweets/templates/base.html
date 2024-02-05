@@ -66,8 +66,14 @@
         <!-- Add your navigation menu here -->
         <nav>
             <ul>
+                
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'product_list' %}">product</a></li>
+                <li><a href="{% url 'list' %}">the market</a></li>
+                <li><a href="{% url 'product_create' %}">add product</a></li>
+                <li><a href="{% url 'category_create' %}">add category</a></li>
+                <li><a href="#">perfumes</a></li>
+                <li><a href="#">night dress</a></li>
+                <li><a href="#">auds</a></li>
                 <li><a href="{% url 'login' %}">login</a></li>
                 <li><a href="{% url 'register' %}">register</a></li>
                 <!-- Add more navigation links as needed -->

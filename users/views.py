@@ -46,3 +46,8 @@ def login_view(request):
     else:
         form = UserLoginForm()
     return render(request, 'tweets/login.html', {'form': form})
+from prod.models import Product
+
+def list_it(request):
+    prode = Product.objects.all()
+    return render(request, 'tweets/list.html', {'prode':prode})
