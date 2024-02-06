@@ -1,4 +1,6 @@
 <!-- registration/login.html -->
+{% extends 'base.html' %}
+{% block content %}
   <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
@@ -6,4 +8,5 @@
     <button type="submit">Login</button>
   </form>
   <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+  {% endblock %}
 

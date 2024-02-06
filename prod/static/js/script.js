@@ -1,4 +1,7 @@
 
+document.getElementById("menu-button").addEventListener("click", function() {
+    document.getElementById("sidebar").classList.toggle("sidebar-visible");
+});
 
 function toggleSidebar() {
     var sidebar = document.getElementById("sidebar");

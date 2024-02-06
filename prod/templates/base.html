@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Your Website{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
      .nav-secondary {
     display: flex;
     justify-content: space-between; /* Align items at the ends of the container */
     align-items: center; /* Align items vertically */
     padding: 10px 20px; /* Adjust padding as needed */
-    background-color: #e78709; /* Adjust background color as needed */
+    background-color: #f17522; /* Adjust background color as needed */
     border-bottom: 1px solid #ddd; /* Add a border at the bottom */
 }
 
@@ -40,10 +41,16 @@
       <img src="{% static 'photo/abya-log.webp' %}" alt="Logo">
   </div>
   <div class="links-left">
-    <li> <a href="{% url 'list_it' %}">Home</a></li>
+    {% if user.is_authenticated %}
     <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'profile' %}">profile</a>
+    <li> <a href="{% url 'list_it' %}">Home</a></li>
+    {% else %}
+    <li> <a href="{% url 'list_it' %}">Home</a></li>
     <a href="{% url 'login' %}">Login</a>
     <a href="{% url 'register' %}">Register</a>
+    
+    {% endif %}
    
   </div>
 </nav>
@@ -57,19 +64,19 @@
     <nav class="navbar">
         <div class="navbar-toggle" onclick="toggleSidebar()">Menu</div>
     </nav>
+    
     <div class="sidebar" id="sidebar">
         <!-- Sidebar content goes here -->
         <ul>
-         <li> <a href="{% url 'list_it' %}">The Market</a></li>
-          <li><a href="{% url 'product_create' %}">Add Product</a></li>
-            <li><a href="{% url 'category_create' %}">Add Category</a></li>
-              <li><a href="#">Perfumes</a></li>
-                <li><a href="#">Night Dress</a></li>
-                  <li><a href="#">Audios</a></li>
-                  {% if user.is_authenticated %}
-                
-                  <li><a href="{% url 'profile' %}">Profile</a></li>
-                  {% endif %}
+          <li><a href="{% url 'list_it' %}"><i class="fas fa-store"></i> The Market</a></li>
+          <li><a href="{% url 'product_create' %}"><i class="far fa-calendar-alt"></i> Add Product</a></li>
+          <li><a href="{% url 'category_create' %}"><i class="fas fa-plus-circle"></i> Add Category</a></li>
+          <li><a href="#"><i class="fas fa-perfume"></i> Perfumes</a></li>
+          <li><a href="#"><i class="fas fa-moon"></i> Night Dress</a></li>
+          <li><a href="#"><i class="fas fa-headphones"></i> Audios</a></li>
+             {% if user.is_authenticated %}
+          <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a></li>
+            {% endif %}
         </ul>
     </div>
     <div class="content">
@@ -77,5 +84,12 @@
         {% endblock %}
     </div>
     <script src="{% static 'js/script.js' %}"></script>
+    <main>
+
+
+  <footer>
+      <p>&copy; 2024 BAKRI. All rights reserved.</p>
+  </footer>
 </body>
+    
 </html>

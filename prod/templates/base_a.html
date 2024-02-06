@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}bakri commercials{% endblock %}</title>
+    <style>
+        /* Hide the checkbox */
+#sidebar-toggle {
+    display: none;
+}
+
+/* Style for the sidebar */
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    transition: left 0.3s ease-in-out;
+}
+
+/* Style for the sidebar links */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+}
+
+.sidebar a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Style for the toggle button */
+.sidebar-toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* When the checkbox is checked, show the sidebar */
+#sidebar-toggle:checked + .sidebar {
+    left: 0;
+}
+
+/* Adjust content area when sidebar is open */
+#sidebar-toggle:checked + .sidebar + .content {
+    margin-left: 250px;
+}
+
+    </style>
+<body>
+ id="sidebar-toggle">
+<div class="sidebar">
+    <!-- Sidebar content goes here -->
+    <ul>
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+    </ul>
+</div>
+<label for="sidebar-toggle" class="sidebar-toggle-btn">&#9776; Open Sidebar</label>
+<div class="content">
+    <!-- Main content goes here -->
+    <h1>Main Content</h1>
+    <p>This is the main content area.</p>
+    {%block content%}{% endblock %}
+</div>
+</body>
+</head>
+</html>

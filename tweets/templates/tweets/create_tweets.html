@@ -1,5 +1,6 @@
 <!-- tweets/templates/tweets/create_tweet.html -->
-
+{% extends 'base.html' %}
+{% block content %}
 
 <h1>Create New Tweet</h1>
 <form method="post">
@@ -8,4 +9,4 @@
   <textarea id="content" name="content" rows="4" cols="50"></textarea><br>
   <input type="submit" value="Submit">
 </form>
-
+{% endblock %}
