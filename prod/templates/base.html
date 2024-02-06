@@ -37,9 +37,7 @@
 <body>
 
   <nav class="nav-secondary">
-    <div class="logo">
-      <img src="{% static 'photo/abya-log.webp' %}" alt="Logo">
-  </div>
+    
   <div class="links-left">
     {% if user.is_authenticated %}
     <a href="{% url 'logout' %}">Logout</a>
