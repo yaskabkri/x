@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+     .nav-secondary {
+    display: flex;
+    justify-content: space-between; /* Align items at the ends of the container */
+    align-items: center; /* Align items vertically */
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #e78709; /* Adjust background color as needed */
+    border-bottom: 1px solid #ddd; /* Add a border at the bottom */
+}
+
+/* CSS for the links aligned to the left */
+.links-left {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+/* CSS for the logo */
+.logo img {
+    width: 50px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add space between the logo and navbar links */
+    vertical-align: middle; /* Align the logo vertically */
+}
+
+    </style>
+</head>
+<body>
+
+  <nav class="nav-secondary">
+    <div class="logo">
+      <img src="{% static 'photo/abya-log.webp' %}" alt="Logo">
+  </div>
+  <div class="links-left">
+    <li> <a href="{% url 'list_it' %}">Home</a></li>
+    <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'register' %}">Register</a>
+   
+  </div>
+</nav>
+
+        
+        
+        
+        <!-- Add more navigation links as needed -->
+    </ul>
+</nav>
+    <nav class="navbar">
+        <div class="navbar-toggle" onclick="toggleSidebar()">Menu</div>
+    </nav>
+    <div class="sidebar" id="sidebar">
+        <!-- Sidebar content goes here -->
+        <ul>
+         <li> <a href="{% url 'list_it' %}">The Market</a></li>
+          <li><a href="{% url 'product_create' %}">Add Product</a></li>
+            <li><a href="{% url 'category_create' %}">Add Category</a></li>
+              <li><a href="#">Perfumes</a></li>
+                <li><a href="#">Night Dress</a></li>
+                  <li><a href="#">Audios</a></li>
+                  {% if user.is_authenticated %}
+                
+                  <li><a href="{% url 'profile' %}">Profile</a></li>
+                  {% endif %}
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

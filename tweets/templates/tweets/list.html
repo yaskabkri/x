@@ -29,7 +29,7 @@
         }
     </style>
 
-    <h1>Item List</h1>
+    
 
     <div class="masonry">
         {% for item in prode %}
@@ -50,10 +50,8 @@
             {% endif %}
             <div class="item-content">
                 <h2>{{ item.name }}</h2>
-                <p>Category: {{ item.category }}</p>
+                
                 <p>Price: ${{ item.cost_price }}</p>
-                <p>Quantity: {{ item.quantity }}</p>
-                <p>shop saler: {{ item.user.username }}</p>
                 <p><a href="#">buy now</a> 
                 
             </div>
