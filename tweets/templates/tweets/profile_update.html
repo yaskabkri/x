@@ -1,0 +1,13 @@
+<!-- profile_update.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+    <title>Profile Update</title>
+
+    <h2>Update Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
+    {% endblock %}

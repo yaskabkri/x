@@ -1,11 +1,32 @@
 {% extends 'base2.html' %}
 
 {% block content %}
-{% for product in products %}
-{{produc.user.username}}
-{{produc.cost_price}}
-{{produc.quantity}}
-
+<img src="{{ product.image.url }}">
+  <div class="container">
+    <div class="row">
+      {% for product in products %}
+      
+        <div class="col-md-4">
+          <div class="product-card">
+            {% if product.image %}
+             <img src="{{ product.image.url }}" class="product-image" alt="{{ product.name }}">
+            {% else %}
+            {{ product.name }}
+            {% endif %}
+             
+            
+            <div class="product-details">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <p class="product-category">{{ product.category }}</p>
+              <p class="product-price">Cost: ${{ product.cost_price }}</p>
+              <!-- Add more details as needed -->
+              <a href="{#}" class="btn btn-primary">Buy</a>
+              <a href="{#}" class="btn btn-warning">Update</a>
+              <a href="{#}" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
       {% endfor %}
-    
+    </div>
+  </div>
 {% endblock %}

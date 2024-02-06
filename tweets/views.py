@@ -2,10 +2,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from users.models import Tweet
+from prod.models import Product
 
 def home(request):
+    prode = Product.objects.all()
     tweets = Tweet.objects.all().order_by('-created_at')
-    return render(request, 'tweets/home.html', {'tweets': tweets})
+    return render(request, 'tweets/home.html', {'prode':prode,'tweets': tweets})
+    
+    
 
 def create_tweet(request):
     if request.method == 'POST':

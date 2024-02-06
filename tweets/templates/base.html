@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Your Website{% endblock %}</title>
+    <title>{% block title %}bakri commercials{% endblock %}</title>
     <style>
         /* CSS styles */
         /* Reset default margin and padding */
@@ -16,7 +16,7 @@
 
         /* Style header */
         header {
-            background-color: #333;
+            background-color: #0a0a0a;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -76,6 +76,13 @@
                 <li><a href="#">auds</a></li>
                 <li><a href="{% url 'login' %}">login</a></li>
                 <li><a href="{% url 'register' %}">register</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">logout</a></li>
+                <li><a href="{% url 'profile' %}">profile</a></li>
+                {% endif %}
+                
+                
+                
                 <!-- Add more navigation links as needed -->
             </ul>
         </nav>
@@ -88,7 +95,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Your Website. All rights reserved.</p>
+        <p>&copy; 2024 BAKRI. All rights reserved.</p>
     </footer>
 </body>
 </html>

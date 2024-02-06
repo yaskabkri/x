@@ -12,3 +12,14 @@ from django.contrib.auth.forms import AuthenticationForm
 class UserLoginForm(AuthenticationForm):
     class Meta:
         fields = ['username', 'password']  # Fields to display in the form
+
+
+# forms.py
+
+from django import forms
+from .models import UserProfile
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['phone_number', 'location', 'shop_number', 'profile_picture']

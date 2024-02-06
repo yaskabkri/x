@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if user.is_authenticated %}
   <h2>{% if form.instance.pk %}Update Product{% else %}Create Product{% endif %}</h2>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>
   </form>
+  {% else %}
+    <h3>Please log in to post you product.</h3>
+    <a class="nav-link" href="{% url 'login' %}">login here</a>
+{% endif %}
 {% endblock %}

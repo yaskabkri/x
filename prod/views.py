@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'prod/product_list.html', {'products': products})
-@login_required
+#@login_required
 def product_create(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
