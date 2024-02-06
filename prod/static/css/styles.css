@@ -18,18 +18,15 @@ header {
 }
 
 .sidebar {
-    width: 100px; /* Adjust the width according to your preference */
-    background-color: #d4cfcf; /* Example background color */
-    position: fixed; /* Keep the sidebar fixed while scrolling */
+    width: 100px;
+    background-color: #faefef;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
-    overflow-y: auto; /* Allow vertical scrolling if the content overflows */
-    transition: width 0.5s; /* Add transition effect for smooth resizing */
+    overflow-y: auto;
+    transition: width 0.5s;
 }
-
-/* Add additional styles as needed */
-
 
 .sidebar ul {
     list-style-type: none;
@@ -51,11 +48,25 @@ header {
     transition: margin-left 0.5s;
 }
 
-/* CSS classes for styling the second navbar */
 .nav-secondary {
-    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
-    text-align: center;
+    background-color: #f17522;
+    border-bottom: 1px solid #ddd;
+}
+
+.links-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    vertical-align: middle;
 }
 
 .nav-secondary a {
@@ -74,36 +85,9 @@ header {
     background-color: #f5c0a7;
 }
 
-
 footer {
     background-color: #f17522;
     color: #fff;
     height: 30px;
     text-align: center;
-    
-}
-
-
-
-.nav-secondary {
-    display: flex;
-    justify-content: space-between; /* Align items at the ends of the container */
-    align-items: center; /* Align items vertically */
-    padding: 10px 20px; /* Adjust padding as needed */
-    background-color: #f17522; /* Adjust background color as needed */
-    border-bottom: 1px solid #ddd; /* Add a border at the bottom */
-}
-
-/* CSS for the links aligned to the left */
-.links-left {
-    display: flex;
-    align-items: center; /* Align items vertically */
-}
-
-/* CSS for the logo */
-.logo img {
-    width: 50px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Add space between the logo and navbar links */
-    vertical-align: middle; /* Align the logo vertically */
 }

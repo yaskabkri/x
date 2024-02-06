@@ -1,101 +1,95 @@
-<!-- base.html -->
-
 <!DOCTYPE html>
 <html lang="en">
+  {% load static %}
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}bakri commercials{% endblock %}</title>
+    <title>{% block title %}Your Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
     <style>
-        /* CSS styles */
-        /* Reset default margin and padding */
-        body, h1, h2, h3, p, ul, li {
-            margin: 0;
-            padding: 0;
-        }
+     .nav-secondary {
+    display: flex;
+    justify-content: space-between; /* Align items at the ends of the container */
+    align-items: center; /* Align items vertically */
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #f17522; /* Adjust background color as needed */
+    border-bottom: 1px solid #ddd; /* Add a border at the bottom */
+}
 
-        /* Style header */
-        header {
-            background-color: #fdf9f9;
-            color: #fdf0f0;
-            padding: 20px;
-            text-align: center;
-        }
+/* CSS for the links aligned to the left */
+.links-left {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
 
-        header h1 {
-            margin-bottom: 10px;
-        }
+/* CSS for the logo */
+.logo img {
+    width: 50px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add space between the logo and navbar links */
+    vertical-align: middle; /* Align the logo vertically */
+}
 
-        /* Style navigation menu */
-        nav ul {
-            list-style: none;
-        }
-
-        nav ul li {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #ffd700; /* Change color on hover */
-        }
-
-        /* Style main content */
-        main {
-            padding: 20px;
-        }
-
-        /* Style footer */
-        footer {
-            background-color: #f17522;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-        }
     </style>
 </head>
 <body>
-    <header>
-        <h1></h1>
-        <!-- Add your navigation menu here -->
-        <nav>
-            <ul>
-                
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'list_it' %}">the market</a></li>
-                <li><a href="{% url 'product_create' %}">add product</a></li>
-                <li><a href="{% url 'category_create' %}">add category</a></li>
-                <li><a href="#">perfumes</a></li>
-                <li><a href="#">night dress</a></li>
-                <li><a href="#">auds</a></li>
-                <li><a href="{% url 'login' %}">login</a></li>
-                <li><a href="{% url 'register' %}">register</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">logout</a></li>
-                <li><a href="{% url 'profile' %}">profile</a></li>
-                {% endif %}
-                
-                
-                
-                <!-- Add more navigation links as needed -->
-            </ul>
-        </nav>
-    </header>
 
-    <main>
+  <nav class="nav-secondary">
+    
+  <div class="links-left">
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'profile' %}">profile</a>
+    <li> <a href="{% url 'list_it' %}">Home</a></li>
+    {% else %}
+    <li> <a href="{% url 'list_it' %}">Home</a></li>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'register' %}">Register</a>
+    
+    {% endif %}
+   
+  </div>
+</nav>
+
+        
+        
+        
+        <!-- Add more navigation links as needed -->
+    </ul>
+</nav>
+    <nav class="navbar">
+        <div class="navbar-toggle" onclick="toggleSidebar()">Menu</div>
+    </nav>
+    
+    <div class="sidebar" id="sidebar">
+        <!-- Sidebar content goes here -->
+        <ul>
+          <li><a href="{% url 'list_it' %}"><i class="fas fa-store"></i> The Market</a></li>
+          <li><a href="{% url 'product_create' %}"><i class="far fa-calendar-alt"></i> Add Product</a></li>
+          <li><a href="{% url 'category_create' %}"><i class="fas fa-plus-circle"></i> Add Category</a></li>
+          <li><a href="#"><i class="fas fa-perfume"></i> Perfumes</a></li>
+          <li><a href="#"><i class="fas fa-moon"></i> Night Dress</a></li>
+          <li><a href="#"><i class="fas fa-headphones"></i> Audios</a></li>
+             {% if user.is_authenticated %}
+          <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="content">
         {% block content %}
-        <!-- This block will be overridden by child templates -->
         {% endblock %}
-    </main>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+    <main>
 
-    <footer>
-        <p>&copy; 2024 BAKRI. All rights reserved.</p>
-    </footer>
+
+  <footer>
+      <p>&copy; 2024 BAKRI. All rights reserved.</p>
+  </footer>
 </body>
+    
 </html>
