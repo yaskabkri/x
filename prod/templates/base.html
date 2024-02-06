@@ -8,6 +8,102 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+      body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.navbar {
+    background-color: #070707;
+    color: #fff;
+    padding: 10px;
+}
+
+header {
+    background-color: #fdf9f9;
+    color: #fdf0f0;
+    padding: 20px;
+    text-align: center;
+}
+
+.sidebar {
+    width: 100px;
+    background-color: #faefef;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    transition: width 0.5s;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+}
+
+.sidebar a {
+    color: #aaa3a3;
+    text-decoration: none;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.5s;
+}
+
+.nav-secondary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f17522;
+    border-bottom: 1px solid #ddd;
+}
+
+.links-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.nav-secondary a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+.nav-secondary a:hover {
+    background-color: #fa5001;
+}
+
+.nav-secondary a.active {
+    background-color: #f5c0a7;
+}
+
+footer {
+    background-color: #f17522;
+    color: #fff;
+    height: 30px;
+    text-align: center;
+}
+
+    </style>
 </head>
 <body>
   <nav class="nav-secondary">
