@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Profile Details and Picture on the left -->
     <div class="profile-details">
-        <!-- Profile Picture -->
         <div class="profile-picture-container">
             <div class="profile-picture">
                 {% if user_profile.profile_picture %}
@@ -13,25 +11,33 @@
                 {% endif %}
             </div>
             <div class="profile-info">
-                <p class="profile-name">{{ user_profile.user.username }}</p>
-                <p class="profile-name">{{ user_profile.phone_number }}</p>
-                <p class="profile-name">{{ user_profile.location }}</p>
+                <table>
+                    <tr>
+                        <td><strong>saler</strong></td>
+                        <td class="profile-name">{{ user_profile.user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>contact</strong></td>
+                        <td class="profile-name">{{ user_profile.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>location</strong></td>
+                        <td class="profile-name">{{ user_profile.location }}</td>
+                    </tr>
+                </table>
                 <button type="button" class="my-button"><a href="{% url 'profile_update' %}">Update your profile</a></button>
             </div>
         </div>
     </div>
 
-    <!-- Border between profile details and product pictures -->
     <div class="border"></div>
 
-    <!-- Pictures of Products in the middle -->
     <div class="product-list">
-        <h1>Item List</h1>
+        <h1>Your products</h1>
         <div class="product-grid">
             {% for item in user_products %}
                 {% if not item.item_video %}
                     <div class="item">
-                        <!-- Display item images -->
                         {% if item.image %}
                             <img src="{{ item.image.url }}" alt="{{ item.name }}">
                             <div class="item-content">
@@ -39,7 +45,8 @@
                                 <p>Category: {{ item.category }}</p>
                                 <p>Price: ${{ item.cost_price }}</p>
                                 <p>Quantity: {{ item.quantity }}</p>
-                                <p><a href="#">Update</a> | <a href="#">Delete</a></p>
+                                <p><a href="{% url 'product_update' pk=item.pk %}">Update</a> |<a href="{% url 'product_delete' pk=item.pk %}">Delete</a></p>
+
                             </div>
                         {% else %}
                             {{ item.name }}
@@ -51,10 +58,9 @@
     </div>
 
     <style>
-        /* Adjust CSS as needed */
         .profile-details {
             float: left;
-            width: 30%; /* Adjust width for the profile details */
+            width: 30%;
             padding: 20px;
         }
 
@@ -64,18 +70,30 @@
         }
 
         .profile-picture {
-            margin-right: 20px; /* Adjust spacing between picture and info */
+            margin-right: 20px;
         }
 
         .profile-picture img {
             width: 150px;
             height: 150px;
-            border-radius: 50%; /* Make the image round */
+            border-radius: 50%;
             overflow: hidden;
         }
 
-        .profile-info p {
-            margin: 5px 0; /* Adjust spacing between profile details */
+        .profile-info table {
+            margin-top: 10px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .profile-info td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .profile-info td:first-child {
+            width: 120px;
+            font-weight: bold;
         }
 
         .my-button {
@@ -93,20 +111,20 @@
         }
 
         .border {
-            border-right: 1px solid #ccc; /* Add a border between profile details and product pictures */
+            border-right: 1px solid #ccc;
             height: 100%;
-            margin-left: 20px; /* Adjust margin as needed */
+            margin-left: 20px;
         }
 
         .product-list {
             float: left;
-            width: 70%; /* Adjust width for the product list */
+            width: 70%;
             padding: 20px;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Three columns per row */
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
@@ -114,13 +132,13 @@
             position: relative;
             overflow: hidden;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
 
         .item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
 
         .item img {
@@ -132,7 +150,5 @@
         .item-content {
             padding: 15px;
         }
-
-        /* Other styles remain unchanged */
     </style>
 {% endblock %}

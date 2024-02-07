@@ -8,16 +8,21 @@ def home(request):
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'prod/product_list.html', {'products': products})
-#@login_required
-def product_create(request):
+
+@login_required
+def create_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('product_list')
+            # Set the user field to the currently logged-in user
+            product = form.save(commit=False)
+            product.user = request.user  # Assign the currently logged-in user
+            product.save()
+            return redirect('product_detail', product_id=product.id)
     else:
         form = ProductForm()
-    return render(request, 'prod/product_form.html', {'form': form})
+    return render(request, 'prod/create_product.html', {'form': form})
+
 
 def product_update(request, pk):
     product = get_object_or_404(Product, pk=pk)

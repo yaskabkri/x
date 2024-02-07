@@ -46,6 +46,12 @@
             font-size: 16px;
             color: #f39034;
         }
+        .user-picture {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-top: 5px;
+        }
     </style>
 
     <div class="product-grid">
@@ -55,12 +61,15 @@
                 <div class="product-card">
                     {% if product.image %}
                         <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                        <img src="{{ product.user.profile.profile_picture.url }}">
                     {% endif %}
                     <div class="product-info">
                         <div class="product-title">{{ product.name }}</div>
                         <div class="product-title">{{ product.user.profile.location }}</div>
                         <div class="product-title">{{ product.user.profile.phone_number }}</div>
+                        <!-- Add user picture -->
+                        {% if product.user.profile.profile_picture %}
+                            <img src="{{ product.user.profile.profile_picture.url }}" alt="User Picture" class="user-picture">
+                        {% endif %}
                         <div class="product-price">{{ product.cost_price }} ksh</div>
                     </div>
                 </div>
