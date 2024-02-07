@@ -1,93 +1,57 @@
-body, html {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%;
+    background-color: #f3f3f3;
 }
-
-.navbar {
-    background-color: #070707;
+header {
+    background-color: #232f3e;
     color: #fff;
     padding: 10px;
-}
-
-header {
-    background-color: #fdf9f9;
-    color: #fdf0f0;
-    padding: 20px;
     text-align: center;
 }
-
-.sidebar {
-    width: 100px;
-    background-color: #faefef;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    transition: width 0.5s;
+nav {
+    background-color: #ff9900;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
 }
-
-.sidebar ul {
+nav ul {
     list-style-type: none;
+    margin: 0;
     padding: 0;
 }
-
-.sidebar li {
-    padding: 10px;
+nav ul li {
+    display: inline;
+    margin-right: 20px;
 }
-
-.sidebar a {
+nav ul li a {
     color: #fff;
     text-decoration: none;
 }
-
 .content {
-    margin-left: 250px;
     padding: 20px;
-    transition: margin-left 0.5s;
-}
-
-.nav-secondary {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f17522;
-    border-bottom: 1px solid #ddd;
+    flex-wrap: wrap;
+    justify-content: center;
 }
-
-.links-left {
-    display: flex;
-    align-items: center;
+.product {
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
 }
-
-.logo img {
-    width: 50px;
+.product img {
+    width: 100%;
     height: auto;
-    margin-right: 10px;
-    vertical-align: middle;
 }
-
-.nav-secondary a {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 15px;
-    margin: 0 5px;
-    border-radius: 5px;
-}
-
-.nav-secondary a:hover {
-    background-color: #fa5001;
-}
-
-.nav-secondary a.active {
-    background-color: #f5c0a7;
-}
-
 footer {
-    background-color: #f17522;
+    background-color: #232f3e;
     color: #fff;
-    height: 30px;
     text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

@@ -4,11 +4,7 @@ from django.contrib.auth.decorators import login_required
 from users.models import Tweet
 from prod.models import Product
 
-def home(request):
-    prode = Product.objects.all()
-    tweets = Tweet.objects.all().order_by('-created_at')
-    return render(request, 'tweets/home.html', {'prode':prode,'tweets': tweets})
-    
+
     
 
 def create_tweet(request):
@@ -20,7 +16,7 @@ def create_tweet(request):
     return render(request, 'tweets/create_tweets.html')
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
-from .forms import ProductForm
+from prod.forms import ProductForm
 
 def product_list(request):
     products = Product.objects.all()

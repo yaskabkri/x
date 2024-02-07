@@ -1,8 +1,10 @@
 # users/urls.py
 from django.urls import path
 from . import views
+from prod.views import home
 
 urlpatterns = [
+     path('', home, name='home'),
     path('profile/', views.profile, name='profile'),
     path('register/', views.register, name='register'),
     path('login/', views.login_view, name='login'),

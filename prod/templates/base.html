@@ -1,70 +1,101 @@
+<!-- base.html -->
 <!DOCTYPE html>
 <html lang="en">
   {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Your Website{% endblock %}</title>
+    <title>{% block title %}Amazon{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
-      body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-.navbar {
-    background-color: #070707;
-    color: #fff;
-    padding: 10px;
-}
-
-header {
-    background-color: #fdf9f9;
-    color: #fdf0f0;
-    padding: 20px;
-    text-align: center;
-}
-
-.sidebar {
-    width: 100px;
-    background-color: #faefef;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    transition: width 0.5s;
-}
-
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar li {
-    padding: 10px;
-}
-
-.sidebar a {
-    color: #aaa3a3;
-    text-decoration: none;
-}
-
-.content {
-    margin-left: 250px;
-    padding: 20px;
-    transition: margin-left 0.5s;
-}
-
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #131921;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header img {
+            height: 40px;
+        }
+        header input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        header button {
+            padding: 5px 10px;
+            background-color: #f39034;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        main {
+            padding: 20px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 200px;
+            scroll-snap-align: start;
+            margin-right: 10px;
+        }
+        .carousel-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            background-color: #232f3e;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
 .nav-secondary {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f17522;
+    background-color: #f39034;
     border-bottom: 1px solid #ddd;
 }
 
@@ -73,12 +104,7 @@ header {
     align-items: center;
 }
 
-.logo img {
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
-    vertical-align: middle;
-}
+
 
 .nav-secondary a {
     color: #fff;
@@ -96,53 +122,88 @@ header {
     background-color: #f5c0a7;
 }
 
-footer {
-    background-color: #f17522;
-    color: #fff;
-    height: 30px;
-    text-align: center;
+/* Define styles for screens smaller than 600px */
+@media screen and (max-width: 600px) {
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
+}
+
+/* Define styles for screens between 601px and 1024px */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+        padding: 20px;
+    }
+
+    .content {
+        margin-left: 250px;
+        padding: 20px;
+    }
+}
+
+/* Define styles for screens larger than 1024px */
+@media screen and (min-width: 1025px) {
+    .sidebar {
+        width: 300px;
+        padding: 30px;
+    }
+
+    .content {
+        margin-left: 300px;
+        padding: 30px;
+    }
 }
 
     </style>
 </head>
 <body>
-  <nav class="nav-secondary">
-    <div class="links-left">
-        {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}">Logout</a>
-            <a href="{% url 'profile' %}">Profile</a>
-        {% endif %}
-        <li> <a href="{% url 'list_it' %}">Home</a></li>
-    </div>
-  </nav>
-
-  <nav class="navbar">
-    <div class="navbar-toggle" id="menu-button">Menu</div>
-  </nav>
-
-  <div class="sidebar" id="sidebar">
-    <ul>
-      <li><a href="{% url 'list_it' %}"><i class="fas fa-store"></i> The Market</a></li>
-      <li><a href="{% url 'product_create' %}"><i class="far fa-calendar-alt"></i> Add Product</a></li>
-      <li><a href="{% url 'category_create' %}"><i class="fas fa-plus-circle"></i> Add Category</a></li>
-      <li><a href="#"><i class="fas fa-perfume"></i> Perfumes</a></li>
-      <li><a href="#"><i class="fas fa-moon"></i> Night Dress</a></li>
-      <li><a href="#"><i class="fas fa-headphones"></i> Audios</a></li>
+    <header>
+        <div>
+        </div>
+        <div>
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+        <div>
+            <a href="#">Your Account</a>
+            <a href="#">Orders</a>
+            <a href="#">Cart</a>
+            <a href="{% url 'list_it' %}">Home</a>
+        </div>
+      
+    </header>
+    <nav class="nav-secondary">
+      <div class="links-left">
+          {% if user.is_authenticated %}
+              <a href="{% url 'logout' %}">Logout</a>
+            
+      <a href="{% url 'list_it' %}"><i class="fas fa-store"></i> The Market</a>
+      <a href="{% url 'product_create' %}"><i class="far fa-calendar-alt"></i> Add Product</a>
+      <a href="{% url 'category_create' %}"><i class="fas fa-plus-circle"></i> Add Category</a>
+      <a href="#"><i class="fas fa-perfume"></i> Perfumes</a>
+      <a href="#"><i class="fas fa-moon"></i> Night Dress</a>
+      <a href="#"><i class="fas fa-headphones"></i> Audios</a>
       {% if user.is_authenticated %}
-          <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a></li>
+      <a href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a>
       {% endif %}
-    </ul>
-  </div>
-
-  <div class="content">
-    {% block content %}
-    {% endblock %}
-  </div>
-
-  <footer>
-    <p>&copy; 2024 BAKRI. All rights reserved.</p>
-  </footer>
-
-  <script src="{% static 'js/script.js' %}"></script>
+      {% endif %}
+         
+      </div>
+    </nav>
+  
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Amazon.com, Inc. or its affiliates. All rights reserved.</p>
+    </footer>
 </body>
 </html>

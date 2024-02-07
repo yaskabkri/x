@@ -1,13 +1,9 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
+from prod.models import Product
 
-class Product(models.Model):
-    name = models.CharField(max_length=100)
-    features = models.TextField()
-    benefits = models.TextField()
-    usps = models.TextField()
+
 
 class TargetMarket(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
