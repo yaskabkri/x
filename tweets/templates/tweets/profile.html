@@ -1,116 +1,138 @@
 {% extends 'base.html' %}
+
 {% block content %}
-{% load static %}
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
-
-    
-    
-   
-    <!-- Profile Picture -->
-<div class="profile-picture-container">
-    <div class="profile-picture">
-        {% if user_profile.profile_picture %}
-        <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture">
-    </div>
-    {% else %}
-    <p>sorry</p>
-    {% endif %}
-    <p class="profile-name">{{ user_profile.phone_number }}</p>
-    <p class="profile-name">{{ user_profile.user.username }}</p>
-    <p class="profile-name">{{ user_profile.location }}</p>
-    <button type="button" class="my-button" ><a href="{% url 'profile_update' %}">update your profile</a></button>
-    
-    
-    
-
-</div>
-
-    <div class="profile-container">
-        <div class="profile-header">
-            <!-- Profile Cover Photo -->
-            
-            <!-- Profile Picture -->
-            {% if profile.profile_pictuure %}
+    <!-- Profile Details and Picture on the left -->
+    <div class="profile-details">
+        <!-- Profile Picture -->
+        <div class="profile-picture-container">
             <div class="profile-picture">
-                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture">
+                {% if user_profile.profile_picture %}
+                    <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture">
+                {% else %}
+                    <p>No profile picture</p>
+                {% endif %}
             </div>
-            {% else%}
-            <p>no profile picture</p>
-            {% endif %}
-            <!-- Profile Name -->
-            <h1 class="profile-name">User's Full Name</h1>
+            <div class="profile-info">
+                <p class="profile-name">{{ user_profile.user.username }}</p>
+                <p class="profile-name">{{ user_profile.phone_number }}</p>
+                <p class="profile-name">{{ user_profile.location }}</p>
+                <button type="button" class="my-button"><a href="{% url 'profile_update' %}">Update your profile</a></button>
+            </div>
         </div>
-        <div class="profile-body">
-            <!-- User Information -->
-            <div class="user-info">
-                
-                <p>{{ profile.location }}</p>
-                <p>{{ profile.phone_number }}</p>
-            </div>
-            <!-- User Bio -->
-            <div class="user-bio">
-
-            </div>
-            <!-- User Posts -->
-            
     </div>
-    
-</div>
 
-<style>
-    .masonry {
-        column-count: 3; /* Set the number of columns */
-        column-gap: 20px; /* Adjust the gap between columns */
-    }
-    .item {
-        display: inline-block;
-        margin-bottom: 20px;
-        width: 400px; /* Each item takes the full width of its column */
-        background-color: #f4f4f4; /* Set background color for items */
-        border-radius: 8px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
-    }
-    .item img {
-        max-width: 100%;
-        display: block;
-        border-radius: 8px 8px 0 0; /* Rounded corners for the top of the image */
-    }
-    .item-content {
-        padding: 15px;
-    }
-    .item img, .item video {
-        max-width: 100%;
-        display: block;
-        border-radius: 8px 8px 0 0; /* Rounded corners for the top of the image */
-    }
-</style>
+    <!-- Border between profile details and product pictures -->
+    <div class="border"></div>
 
-<h1>Item List</h1>
-
-<div class="masonry">
-    {% for item in user_products %}
-    {% if not item.item_video %}
-    <div class="item">
-        <!-- Display item images -->
-        {% if item.image %}
-        <img src="{{ item.image.url }}" alt="{{ item.name }}">
-        <div class="item-content">
-            <h2>{{ item.name }}</h2>
-            <p>Category: {{ item.category }}</p>
-            <p>Price: ${{ item.cost_price }}</p>
-            <p>Quantity: {{ item.quantity }}</p>
-        
-            <p><a href="#">Update</a> | <a href="#">Delete</a></p>
+    <!-- Pictures of Products in the middle -->
+    <div class="product-list">
+        <h1>Item List</h1>
+        <div class="product-grid">
+            {% for item in user_products %}
+                {% if not item.item_video %}
+                    <div class="item">
+                        <!-- Display item images -->
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                            <div class="item-content">
+                                <h2>{{ item.name }}</h2>
+                                <p>Category: {{ item.category }}</p>
+                                <p>Price: ${{ item.cost_price }}</p>
+                                <p>Quantity: {{ item.quantity }}</p>
+                                <p><a href="#">Update</a> | <a href="#">Delete</a></p>
+                            </div>
+                        {% else %}
+                            {{ item.name }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
-        {% else %}
-        {{ item.name }}
-    {% endif %}
-    {% endif %}
-       
-</div>
-{% endfor %}
+    </div>
+
+    <style>
+        /* Adjust CSS as needed */
+        .profile-details {
+            float: left;
+            width: 30%; /* Adjust width for the profile details */
+            padding: 20px;
+        }
+
+        .profile-picture-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-picture {
+            margin-right: 20px; /* Adjust spacing between picture and info */
+        }
+
+        .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Make the image round */
+            overflow: hidden;
+        }
+
+        .profile-info p {
+            margin: 5px 0; /* Adjust spacing between profile details */
+        }
+
+        .my-button {
+            background-color: #f39034;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .my-button:hover {
+            background-color: #fa5001;
+        }
+
+        .border {
+            border-right: 1px solid #ccc; /* Add a border between profile details and product pictures */
+            height: 100%;
+            margin-left: 20px; /* Adjust margin as needed */
+        }
+
+        .product-list {
+            float: left;
+            width: 70%; /* Adjust width for the product list */
+            padding: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three columns per row */
+            gap: 20px;
+        }
+
+        .item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+            transition: transform 0.3s ease;
+        }
+
+        .item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+        }
+
+        .item img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .item-content {
+            padding: 15px;
+        }
+
+        /* Other styles remain unchanged */
+    </style>
 {% endblock %}

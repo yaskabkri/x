@@ -1,0 +1,130 @@
+<!-- product_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - Product Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #f2f2f2;
+        }
+        table td, table th {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        table th {
+            background-color: #f39034;
+            color: #fff;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .picture-table th {
+            background-color: #f39034;
+            color: #fff;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f39034;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #fa5001;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Your existing content -->
+        
+        <!-- Button to go back to the home page -->
+        <a href="{% url 'home' %}" class="back-button">Back to Home</a>
+    </div>
+    <div class="container">
+        <h1>{{ product.name }}</h1>
+        {% if product.image %}
+    
+        <table class="picture-table">
+            <tr>
+                <th>Picture</th>
+            </tr>
+            <tr>
+                <td><img src="{{ product.image.url }}" alt="{{ product.name }}"></td>
+            </tr>
+        </table>
+        {% endif %}
+
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td><strong>Category</strong></td>
+                <td>{{ product.category }}</td>
+            </tr>
+            <tr>
+                <td><strong>Cost Price</strong></td>
+                <td>${{ product.cost_price }}</td>
+            </tr>
+            <tr>
+                <td><strong>Quantity</strong></td>
+                <td>{{ product.quantity }}</td>
+            </tr>
+            <tr>
+                <td><strong>Date Posted</strong></td>
+                <td>{{ product.date_post }}</td>
+            </tr>
+            <tr>
+                <td><strong>sizes</strong></td>
+                <td>{{ product.size }}</td>
+            </tr>
+
+            <tr>
+                <td><strong>colord</strong></td>
+                <td>{{ product.color }}</td>
+            </tr>
+            <!-- Add more rows for additional product details -->
+        </table>
+
+        {% if product.video %}
+        <video controls>
+            <source src="{{ product.video.url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        {% endif %}
+    </div>
+</body>
+</html>

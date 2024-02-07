@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     products = Product.objects.all()
     return render(request, 'tweets/home.html', {'products': products})
-
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'prod/product_list.html', {'products': products})
@@ -40,6 +39,13 @@ def product_delete(request, pk):
 
 
 
+from django.shortcuts import render, get_object_or_404
+from .models import Product
+
+def product_detail(request, product_id):
+    # Fetch the product details
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'tweets/product_detail.html', {'product': product})
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Category
@@ -76,3 +82,29 @@ def category_delete(request, pk):
         category.delete()
         return redirect('category_list')
     return render(request, 'category_confirm_delete.html', {'category': category})
+
+
+# views.py
+
+from django.shortcuts import render, redirect
+from .models import Cart, CartItem
+from .forms import CartItemForm
+
+def view_cart(request):
+    cart = Cart.objects.get_or_create(user=request.user)[0]
+    cart_items = cart.items.all()
+    return render(request, 'tweets/view_cart.html', {'cart_items': cart_items, 'cart': cart})
+
+def add_to_cart(request, product_id):
+    cart = Cart.objects.get_or_create(user=request.user)[0]
+    product = Product.objects.get(pk=product_id)
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+    return redirect('view_cart')
+
+def remove_from_cart(request, cart_item_id):
+    cart_item = CartItem.objects.get(pk=cart_item_id)
+    cart_item.delete()
+    return redirect('view_cart')

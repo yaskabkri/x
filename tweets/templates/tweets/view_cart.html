@@ -1,0 +1,24 @@
+<!-- view_cart.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cart</title>
+</head>
+<body>
+    <h1>Cart</h1>
+    <ul>
+        {% for cart_item in cart_items %}
+            <li>
+                {{ cart_item.product.name }} - Quantity: {{ cart_item.quantity }}
+                <form action="{% url 'remove_from_cart' cart_item.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Remove from Cart</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

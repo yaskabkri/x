@@ -1,15 +1,125 @@
-{%extends 'base.html.%}
-{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>{% block title %}Amazon{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <style>
+         .masonry {
+            column-count: 3; /* Set the number of columns */
+            column-gap: 20px; /* Adjust the gap between columns */
+        }
+        .item {
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 100%; /* Each item takes the full width of its column */
+            background-color: #f4f4f4; /* Set background color for items */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+        }
+        .item img {
+            max-width: 100%;
+            margin-top: 25px;
+            display: block;
+            border-radius: 8px 8px 0 0; /* Rounded corners for the top of the image */
+        }
+        .item-content {
+            padding: 8px;
+        }
+        .item img, .item video {
+            max-width: 100%;
+            display: block;
+            border-radius: 8px 8px 0 0; /* Rounded corners for the top of the image */
+        }
+        header {
+            background-color: #131921;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header img {
+            height: 40px;
+        }
+        header input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        header button {
+            padding: 5px 10px;
+            background-color: #ff9900;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+    </style>
+
 </head>
 <body>
-    <h1>Product List</h1>
-    <ul>
-        {% for product in products %}
-            <li>{{ product.name }} - {{ product.price }}</li>
-        {% endfor %}
-    </ul>
-    {% endblock %}
+    <header>
+       
+        <div>
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+        <div>
+            <a href="#">Your Account</a>
+            <a href="#">Orders</a>
+            <a href="#">Cart</a>
+            <a href="{% url 'home' %}">home</a>
+        </div>
+    </header>
 
+    <div class="masonry">
+        {% for item in prode %}
+        {% if not item.item_video %}
+        <div class="item">
+            <!-- Display item images -->
+            {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            {% else %}
+            {{ item.name }}
+            {% endif %}
+            
+            {% if item.item_video %}
+                <video controls>
+                    <source src="{{ item.item_video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% endif %}
+            <div class="item-content">
+                <h2>{{ item.name }}</h2>
+                
+                <p>Price: ${{ item.cost_price }}</p>
+                <p><a href="#">buy now</a> 
+                
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'product_create' %}">Create New Item</a>
+
+    <!-- Masonry JavaScript -->
+    <script>
+        window.onload = function() {
+            var container = document.querySelector('.masonry');
+            var masonry = new Masonry(container, {
+                itemSelector: '.item',
+                columnWidth: '.item',
+                gutter: 20
+            });
+        }
+    </script>
