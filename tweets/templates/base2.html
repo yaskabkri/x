@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Amazon{% endblock %}</title>
+    <title>{% block title %}EASTLIGH ABAYA{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <style>
         /* Add your custom CSS styles here */
         body {
@@ -84,93 +86,113 @@
         footer {
             background-color: #232f3e;
             color: #fff;
-            padding: 20px;
+            padding: 10px 0; /* Adjust padding here */
             text-align: center;
+            font-size: 14px;
         }
-        .nav-secondary {
+        .nav-primary {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background-color: #f5f3f1;
             padding: 10px 20px;
-            background-color: #f39034;
-            border-bottom: 1px solid #ddd;
         }
-        .links-left {
-            display: flex;
-            align-items: center;
-        }
-        .nav-secondary a {
+        .nav-primary a {
             color: #fff;
             text-decoration: none;
             padding: 10px 15px;
-            margin: 0 5px;
             border-radius: 5px;
         }
-        .nav-secondary a:hover {
-            background-color: #fa5001;
+        .nav-primary a:hover {
+            background-color: #161515;
         }
-        .nav-secondary a.active {
-            background-color: #f5c0a7;
+        .nav-primary a.active {
+            background-color: #f0ebe8;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #080808;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px; /* Rounded corners */
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown a {
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .dropdown:hover a {
+            background-color: #030303;
         }
 
-        /* Media queries for screens smaller than 600px */
-        @media screen and (max-width: 600px) {
-            header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            header div:nth-child(2) {
-                margin-top: 10px;
-            }
-            .nav-secondary {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .nav-secondary .links-left {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .nav-secondary a {
-                margin: 5px 0;
-            }
-        }
-    </style>
+
+
+        
+</style>
 </head>
 <body>
+    
     <header>
         <div>
-            <a href="#">Amazon</a>
+            <a href="#">Contact</a>
         </div>
         <div>
             <input type="text" placeholder="Search...">
             <button>Search</button>
         </div>
-        <div>
-            <a href="#">Your Account</a>
-            <a href="#">Orders</a>
-            <a href="#">Cart</a>
-            <a href="{% url 'list_it' %}">Home</a>
-        </div>
-    </header>
-    <nav class="nav-secondary">
-        <div class="links-left">
-            {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">Logout</a>
+        <div class="dropdown">
+            <a href="#">Menu</a>
+            
+            <div class="dropdown-content">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                    
+               
                 <a href="{% url 'list_it' %}"><i class="fas fa-store"></i> The Market</a>
                 <a href="{% url 'product_create' %}"><i class="far fa-calendar-alt"></i> Add Product</a>
                 <a href="{% url 'category_create' %}"><i class="fas fa-plus-circle"></i> Add Category</a>
-                <a href="#"><i class="fas fa-perfume"></i> Perfumes</a>
-                <a href="#"><i class="fas fa-moon"></i> Night Dress</a>
                 <a href="#"><i class="fas fa-headphones"></i> Audios</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'profile' %}"><i class="fas fa-user"></i> Profile</a>
+                {% else %}
+                <a href="{% url 'register' %}">Register <i class="fas fa-user-plus"></i></a>
+                <a href="{% url 'login' %}">Login <i class="fas fa-sign-in-alt"></i></a>
+                
                 {% endif %}
-            {% endif %}
+            </div>
         </div>
-    </nav>
-    <main>
-        {% block content %}
-        {% endblock %}
+        <div>
+            
+            <a href="#">Orders <i class="fas fa-shopping-bag"></i></a>
+            <a href="{% url 'view_cart' %}">Cart <i class="fas fa-shopping-cart"></i></a>
+            <a href="{% url 'home' %}">Home</a>
+        </div>
+    </header>
+</div>
+
+    {% block content %}
+    {% endblock %}
+</div>
+    <main class="mn">
+       
     </main>
     <footer>
         <p>&copy; 2024 BKRI_Inc. or its affiliates. All rights reserved.</p>

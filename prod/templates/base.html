@@ -94,7 +94,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #f39034;
+            background-color: #f5f3f1;
             padding: 10px 20px;
         }
         .nav-primary a {
@@ -104,10 +104,10 @@
             border-radius: 5px;
         }
         .nav-primary a:hover {
-            background-color: #fa5001;
+            background-color: #161515;
         }
         .nav-primary a.active {
-            background-color: #f5c0a7;
+            background-color: #f0ebe8;
         }
         .dropdown {
             position: relative;
@@ -143,9 +143,80 @@
         .dropdown:hover a {
             background-color: #030303;
         }
-    </style>
+
+        .container {
+            display: flex;
+        }
+        
+
+        .sidebar {
+           height:auto;
+           width:auto;
+    
+            background-color: #181515;
+            color:#131921;
+            transition: transform 0.3s ease;
+            transform: translateX(-250px);
+        }
+
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+
+        input[type="checkbox"]:checked ~ .container .sidebar {
+            transform: translateX(0);
+        }
+
+
+        .sidebar h2 {
+            text-align: center;
+            color: #000;
+        }
+
+
+        .sidebar nav ul {
+   
+            list-style-type: none;
+             padding: 0;
+        }
+
+
+        .sidebar nav ul li {
+    
+            padding: 10px;
+            text-align: center;
+            color: #000;
+        }
+
+
+        .sidebar nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .toggle-btn {
+            position:absolute;
+            margin-top: 2px;
+            z-index: 999;
+            cursor: pointer;
+            background-color:#857d75;
+            color: #fff;
+            padding: 10px;
+        }
+
+</style>
 </head>
 <body>
+    
     <header>
         <div>
             <a href="#">Contact</a>
@@ -175,17 +246,42 @@
             </div>
         </div>
         <div>
+            
             <a href="#">Orders <i class="fas fa-shopping-bag"></i></a>
-            <a href="#">Cart <i class="fas fa-shopping-cart"></i></a>
+            <a href="{% url 'view_cart' %}">Cart <i class="fas fa-shopping-cart"></i></a>
             <a href="{% url 'home' %}">Home</a>
         </div>
     </header>
-    <main>
-        {% block content %}
-        {% endblock %}
+</div>
+<input type="checkbox" id="sidebar-toggle">
+<div class="container">
+    <label for="sidebar-toggle" class="toggle-btn">&#9776; </label>
+    <div class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="#">dresses</a></li>
+                <li><a href="#">tops</a></li>
+                <li><a href="#">jackets</a></li>
+                <li><a href="#">trouser</a></li>
+                <li><a href="#">scirts</a></li>
+                <li><a href="#">perfumes</a></li>
+                <li><a href="#">nightdress</a></li>
+                <li><a href="#">boys</a></li>
+                <li><a href="#">girls</a></li>
+                <li><a href="#">weddings</a></li>
+                <li><a href="#">hijabs</a></li>
+
+            </ul>
+        </nav>
+    </div>
+    {% block content %}
+    {% endblock %}
+</div>
+    <main class="mn">
+       
     </main>
     <footer>
-        <p>&copy; 2024 BKTI_Inc. or its affiliates. All rights reserved.</p>
+        <p>&copy; 2024 BKRI_Inc. or its affiliates. All rights reserved.</p>
     </footer>
 </body>
 </html>

@@ -1,24 +1,132 @@
-<!-- view_cart.html -->
-
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base2.html' %}
+{% block content %}
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Cart</title>
-</head>
-<body>
-    <h1>Cart</h1>
-    <ul>
-        {% for cart_item in cart_items %}
-            <li>
-                {{ cart_item.product.name }} - Quantity: {{ cart_item.quantity }}
-                <form action="{% url 'remove_from_cart' cart_item.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit">Remove from Cart</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+    <title>{% block title %}EASTLIGH ABAYA{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+
+    /* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+td input[type="number"] {
+    width: 60px;
+}
+
+td button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+td button:hover {
+    background-color: #45a049;
+}
+
+.total {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.total h2 {
+    color: #333;
+}
+
+.checkout-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #0056b3;
+}
+
+   </style>
+    <div class="container">
+        <h1>Your Shopping Cart</h1>
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>${{ item.product.cost_price }}</td>
+                <td>
+                    <form action="{% url 'update_cart' item.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td>${{ item.total_price }}</td>
+                <td>
+                    
+
+                    <button><a href="{% url 'remove_from_cart' item.id %}">Remove</a></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="total">
+            <h2>Total Price: ${{ total_price }}</h2>
+            <a href="#" class="checkout-btn">Proceed to Checkout</a>
+            <a href="{% url 'make_payment' %}" class="checkout-btn">pay now</a>
+        </div>
+    </div>
+
+{% endblock %}

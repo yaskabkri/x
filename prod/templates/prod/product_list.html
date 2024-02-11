@@ -21,7 +21,7 @@
               <p class="product-category">{{ product.category }}</p>
               <p class="product-price">Cost: ${{ product.cost_price }}</p>
               <!-- Add more details as needed -->
-              <a href="{#}" class="btn btn-primary">Buy</a>
+              <a href="{{% url 'add_to_cart' priduct.id %}}" class="btn btn-primary">add</a>
               <a href="{#}" class="btn btn-warning">Update</a>
               <a href="{#}" class="btn btn-danger">Delete</a>
             </div>
